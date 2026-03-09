@@ -14,8 +14,8 @@ interface GameScreenProps {
 
 type GamePhase = "playing" | "confirming" | "submitted" | "error";
 
-// Stable cell position IDs (0–80) — never reorder
-const CELL_IDS = Array.from({ length: 81 }, (_, i) => i);
+// Stable cell position IDs (0–35) — never reorder
+const CELL_IDS = Array.from({ length: 36 }, (_, i) => i);
 
 function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60)
@@ -29,20 +29,20 @@ export default function GameScreen({ playerName, sesaId }: GameScreenProps) {
   const { data: clues, isLoading: cluesLoading } = useGetClues();
   const submitMutation = useSubmitPuzzle();
 
-  // ── Board state: 81 cells ────────────────────────────────────────────
+  // ── Board state: 36 cells ────────────────────────────────────────────
   const [cells, setCells] = useState<CellState[]>(() =>
-    Array.from({ length: 81 }, () => ({ type: "empty" }) as CellState),
+    Array.from({ length: 36 }, () => ({ type: "empty" }) as CellState),
   );
 
   // ── Initialise clue cells once loaded ────────────────────────────────
   const initialised = useRef(false);
   useEffect(() => {
-    if (clues && clues.length === 81 && !initialised.current) {
+    if (clues && clues.length === 36 && !initialised.current) {
       initialised.current = true;
       setCells(
         clues.map((v) => {
           const n = Number(v);
-          if (n >= 1 && n <= 9)
+          if (n >= 1 && n <= 6)
             return { type: "clue", colourId: n } as CellState;
           return { type: "empty" } as CellState;
         }),
@@ -95,7 +95,7 @@ export default function GameScreen({ playerName, sesaId }: GameScreenProps) {
           const exists = current.includes(colourId);
           const updated = exists
             ? current.filter((c) => c !== colourId)
-            : [...current, colourId].slice(0, 9);
+            : [...current, colourId].slice(0, 6);
           next[index] =
             updated.length === 0
               ? { type: "empty" }
@@ -293,11 +293,11 @@ export default function GameScreen({ playerName, sesaId }: GameScreenProps) {
                 )}
               </div>
 
-              {/* The 9×9 board */}
+              {/* The 6×6 board */}
               <div
                 data-ocid="game.board.canvas_target"
                 className="sudoku-grid w-full"
-                style={{ maxWidth: "min(90vw, 480px)" }}
+                style={{ maxWidth: "min(90vw, 360px)" }}
               >
                 {CELL_IDS.map((pos) => (
                   <SudokuCell
@@ -326,7 +326,7 @@ export default function GameScreen({ playerName, sesaId }: GameScreenProps) {
                 <h3 className="font-ui font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-3 text-center">
                   Colour Palette
                 </h3>
-                <div className="grid grid-cols-9 lg:grid-cols-3 gap-2 lg:gap-3">
+                <div className="grid grid-cols-6 lg:grid-cols-3 gap-2 lg:gap-3">
                   {COLOURS.map((colour, i) => (
                     <ColourTile
                       key={colour.id}

@@ -8,7 +8,7 @@ export type CellState =
   | { type: "pencil"; candidates: number[] };
 
 interface SudokuCellProps {
-  index: number; // 0–80
+  index: number; // 0–35
   state: CellState;
   colourBlind: boolean;
   isDragOver: boolean;
@@ -30,11 +30,12 @@ export default function SudokuCell({
   onDragLeave,
   onDoubleClick,
 }: SudokuCellProps) {
-  const row = Math.floor(index / 9);
-  const col = index % 9;
+  const row = Math.floor(index / 6);
+  const col = index % 6;
 
-  const thickRight = col === 2 || col === 5;
-  const thickBottom = row === 2 || row === 5;
+  // 2×3 boxes: thick right after column 2 (0-indexed), thick bottom after rows 1, 3
+  const thickRight = col === 2;
+  const thickBottom = row === 1 || row === 3;
 
   const canDrop = state.type === "empty" || state.type === "pencil";
   const isClue = state.type === "clue";
@@ -117,7 +118,7 @@ export default function SudokuCell({
 
       {state.type === "pencil" && (
         <div className="pencil-dots">
-          {Array.from({ length: 9 }, (_, i) => {
+          {Array.from({ length: 6 }, (_, i) => {
             const colourId = state.candidates[i];
             const colour = colourId ? colourOf(colourId) : null;
             // Use a stable compound key from position

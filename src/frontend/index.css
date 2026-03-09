@@ -126,7 +126,7 @@
 /* ─── Sudoku Grid ──────────────────────────────────────── */
 .sudoku-grid {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   border: 3px solid oklch(0.25 0.04 280);
   border-radius: 6px;
   overflow: hidden;
@@ -179,10 +179,11 @@
   outline-offset: -2px;
 }
 
-/* pencil dots grid */
+/* pencil dots grid — 6 slots in 3 cols × 2 rows */
 .pencil-dots {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 1px;
   width: 85%;
   height: 85%;

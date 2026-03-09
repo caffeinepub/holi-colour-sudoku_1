@@ -1,5 +1,5 @@
 export interface ColourDef {
-  id: number; // 1–9
+  id: number; // 1–6
   name: string;
   hex: string;
   cbLabel: string; // colour-blind short label
@@ -56,30 +56,6 @@ export const COLOURS: ColourDef[] = [
     hex: "#4299E1",
     cbLabel: "B",
     oklch: "0.62 0.17 235",
-    textColour: "#fff",
-  },
-  {
-    id: 7,
-    name: "Purple",
-    hex: "#805AD5",
-    cbLabel: "P",
-    oklch: "0.52 0.24 292",
-    textColour: "#fff",
-  },
-  {
-    id: 8,
-    name: "Pink",
-    hex: "#ED64A6",
-    cbLabel: "Pi",
-    oklch: "0.63 0.24 343",
-    textColour: "#fff",
-  },
-  {
-    id: 9,
-    name: "Brown",
-    hex: "#A0522D",
-    cbLabel: "Br",
-    oklch: "0.46 0.10 50",
     textColour: "#fff",
   },
 ];

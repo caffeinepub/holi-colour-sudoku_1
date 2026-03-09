@@ -62,8 +62,8 @@ function sortSubmissions(subs: Submission[]): Submission[] {
   });
 }
 
-// Stable 0–80 positions for board preview rendering
-const PREVIEW_POSITIONS = Array.from({ length: 81 }, (_, i) => i);
+// Stable 0–35 positions for board preview rendering
+const PREVIEW_POSITIONS = Array.from({ length: 36 }, (_, i) => i);
 
 // Mini board preview
 function BoardPreview({ boardState }: { boardState: bigint[] }) {
@@ -71,9 +71,9 @@ function BoardPreview({ boardState }: { boardState: bigint[] }) {
     <div
       className="grid gap-px"
       style={{
-        gridTemplateColumns: "repeat(9, 1fr)",
-        width: 108,
-        height: 108,
+        gridTemplateColumns: "repeat(6, 1fr)",
+        width: 72,
+        height: 72,
         background: "#ccc",
         border: "1px solid #999",
         borderRadius: 4,
@@ -84,10 +84,10 @@ function BoardPreview({ boardState }: { boardState: bigint[] }) {
         const v = boardState[pos] ?? 0n;
         const id = Number(v);
         const colour = COLOURS.find((c) => c.id === id);
-        const row = Math.floor(pos / 9);
-        const col = pos % 9;
-        const thickR = col === 2 || col === 5;
-        const thickB = row === 2 || row === 5;
+        const row = Math.floor(pos / 6);
+        const col = pos % 6;
+        const thickR = col === 2;
+        const thickB = row === 1 || row === 3;
         return (
           <div
             key={`board-preview-pos-${pos}`}

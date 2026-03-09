@@ -6,7 +6,7 @@ interface InstructionsScreenProps {
   onContinue: () => void;
 }
 
-const colourRow = COLOURS.slice(0, 9);
+const colourRow = COLOURS.slice(0, 6);
 
 export default function InstructionsScreen({
   onContinue,
@@ -48,7 +48,7 @@ export default function InstructionsScreen({
           {/* Colour legend */}
           <section>
             <h3 className="font-ui font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-3">
-              The 9 Colours
+              The 6 Colours
             </h3>
             <div className="flex flex-wrap gap-2">
               {colourRow.map((c) => (
@@ -76,15 +76,15 @@ export default function InstructionsScreen({
               {[
                 {
                   id: "rule-row",
-                  text: "Every row (9 cells wide) must contain each of the 9 colours exactly once.",
+                  text: "Every row (6 cells wide) must contain each of the 6 colours exactly once.",
                 },
                 {
                   id: "rule-col",
-                  text: "Every column (9 cells tall) must contain each of the 9 colours exactly once.",
+                  text: "Every column (6 cells tall) must contain each of the 6 colours exactly once.",
                 },
                 {
                   id: "rule-box",
-                  text: "Every 3×3 box (boldly outlined) must contain each of the 9 colours exactly once.",
+                  text: "Every 2×3 box (2 rows × 3 columns, boldly outlined) must contain each of the 6 colours exactly once.",
                 },
                 {
                   id: "rule-clue",
@@ -94,7 +94,7 @@ export default function InstructionsScreen({
                 <li key={id} className="flex gap-2.5 items-start">
                   <span
                     className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0 mt-0.5"
-                    style={{ background: COLOURS[i % 9].hex }}
+                    style={{ background: COLOURS[i % 6].hex }}
                   >
                     {i + 1}
                   </span>
@@ -158,9 +158,9 @@ export default function InstructionsScreen({
             </h3>
             <p className="text-sm text-foreground">
               Use the <span className="font-semibold">Colour-Blind toggle</span>{" "}
-              in the header to add short letter labels (R, O, Y, G, T, B, P, Pi,
-              Br) on all colour tiles and filled cells, making them
-              distinguishable without relying solely on colour.
+              in the header to add short letter labels (R, O, Y, G, T, B) on all
+              colour tiles and filled cells, making them distinguishable without
+              relying solely on colour.
             </p>
           </section>
 
